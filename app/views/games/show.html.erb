@@ -20,7 +20,7 @@
   <table>
         <tr>
             <% (1..7).to_a.each do |header| %>
-            <th><%=button_to header, :action => "droppiece", :column => header, :player => 2 %></th>
+            <th><%=button_to header, :action => "droppiece", :column => header - 1,  :player => 2 %></th>
             <% end %>
         </tr>
   	<% @game.board.each do | row |  %>
