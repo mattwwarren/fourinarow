@@ -41,6 +41,7 @@ class GamesController < ApplicationController
   # POST /games.json
   def create
     @game = Game.new({:board => [[0,0,0,0,0,0,0],[0,0,0,0,0,0,0],[0,0,0,0,0,0,0],[0,0,0,0,0,0,0],[0,0,0,0,0,0,0],[0,0,0,0,0,0,0]] }.merge(params[:game]))
+    @game.ponesession = request.session_options[:id]
 
     respond_to do |format|
       if @game.save
