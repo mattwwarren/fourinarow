@@ -19,27 +19,9 @@
   <b>Board:</b>
   <table>
         <tr>
-            <th class="col1Button">
-               <%=button_to_function "1", "alert('Hello world!')", :class => "col2Button"%>
-            </th>
-            <th class="col2Button">
-               <%=button_to_function "2", "alert('Hello world!')", :class => "col2Button"%>
-            </th>
-            <th class="col3Button">
-               <%=button_to_function "3", "alert('Hello world!')", :class => "col2Button"%>
-            </th>
-            <th class="col4Button">
-               <%=button_to_function "4", "alert('Hello world!')", :class => "col2Button"%>
-            </th>
-            <th class="col5Button">
-               <%=button_to_function "5", "alert('Hello world!')", :class => "col2Button"%>
-            </th>
-            <th class="col6Button">
-               <%=button_to_function "6", "alert('Hello world!')", :class => "col2Button"%>
-            </th>
-            <th class="col7Button">
-               <%=button_to_function "7", "alert('Hello world!')", :class => "col2Button"%>
-            </th>
+            <% (1..7).to_a.each do |header| %>
+            <th><%=button_to header, :action => "droppiece", :column => header, :player => 2 %></th>
+            <% end %>
         </tr>
   	<% @game.board.each do | row |  %>
   	<tr>
