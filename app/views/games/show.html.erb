@@ -17,7 +17,38 @@
 
 <p>
   <b>Board:</b>
-  <%= @game.board %>
+  <table>
+        <tr>
+            <th class="col1Button">
+               <%=button_to_function "1", "alert('Hello world!')", :class => "col2Button"%>
+            </th>
+            <th class="col2Button">
+               <%=button_to_function "2", "alert('Hello world!')", :class => "col2Button"%>
+            </th>
+            <th class="col3Button">
+               <%=button_to_function "3", "alert('Hello world!')", :class => "col2Button"%>
+            </th>
+            <th class="col4Button">
+               <%=button_to_function "4", "alert('Hello world!')", :class => "col2Button"%>
+            </th>
+            <th class="col5Button">
+               <%=button_to_function "5", "alert('Hello world!')", :class => "col2Button"%>
+            </th>
+            <th class="col6Button">
+               <%=button_to_function "6", "alert('Hello world!')", :class => "col2Button"%>
+            </th>
+            <th class="col7Button">
+               <%=button_to_function "7", "alert('Hello world!')", :class => "col2Button"%>
+            </th>
+        </tr>
+  	<% @game.board.each do | row |  %>
+  	<tr>
+	   <% row.each do | column | %>
+           <td><%= column %></td>
+           <% end %>
+        </tr>
+        <% end %>
+  </table>
 </p>
 
 <p>
