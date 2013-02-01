@@ -7,6 +7,8 @@ class CreateGames < ActiveRecord::Migration
       t.string :board
       t.string :playerone
       t.string :playertwo
+      t.string :ponesession
+      t.string :ptwosession
 
       t.timestamps
     end
