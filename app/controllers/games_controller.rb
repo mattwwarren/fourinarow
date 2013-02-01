@@ -37,6 +37,22 @@ class GamesController < ApplicationController
     @game = Game.find(params[:id])
   end
 
+  # GET /games/1/join
+  def join
+    @game = Game.find(params[:id])
+    @game.ptwosession = request.session_options[:id]
+
+    respond_to do |format|
+      if @game.update_attributes(params[:game])
+        format.html { redirect_to @game, :notice => 'Game was successfully updated.' }
+        format.json { head :no_content }
+      else
+        format.html { render :action => "join" }
+        format.json { render :json => @game.errors, :status => :unprocessable_entity }
+      end
+    end
+  end
+
   # POST /games
   # POST /games.json
   def create
