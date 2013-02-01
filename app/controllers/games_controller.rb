@@ -84,8 +84,13 @@ class GamesController < ApplicationController
   # POST /games/1
   # POST /games/1.json
   def droppiece
-     @game = Game.find(params[:id])
+   @game = Game.find(params[:id])
+   @game.board[0][0] = "4"
 
-     :board[0][:column] = :player
+   respond_to do |format|
+      @game.update_attributes(params[:board])
+      format.html { redirect_to @game }
+      format.json { head :no_content } 
   end
+end
 end
