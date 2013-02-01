@@ -80,4 +80,12 @@ class GamesController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+  # POST /games/1
+  # POST /games/1.json
+  def droppiece
+     @game = Game.find(params[:id])
+
+     :board[0][:column] = :player
+  end
 end
