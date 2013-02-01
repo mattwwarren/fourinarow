@@ -38,4 +38,3 @@ gem 'jquery-rails'
 # To use debugger
 # gem 'ruby-debug'
 
-gem 'enumerated_attribute'

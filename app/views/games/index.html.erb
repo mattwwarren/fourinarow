@@ -6,6 +6,8 @@
     <th>Name</th>
     <th>Color</th>
     <th>Board</th>
+    <th>Playerone</th>
+    <th>Playertwo</th>
     <th></th>
     <th></th>
     <th></th>
@@ -17,6 +19,8 @@
     <td><%= game.name %></td>
     <td><%= game.color %></td>
     <td><%= game.board %></td>
+    <td><%= game.playerone %></td>
+    <td><%= game.playertwo %></td>
     <td><%= link_to 'Show', game %></td>
     <td><%= link_to 'Edit', edit_game_path(game) %></td>
     <td><%= link_to 'Destroy', game, :method => :delete, :data => { :confirm => 'Are you sure?' } %></td>

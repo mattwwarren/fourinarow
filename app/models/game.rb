@@ -1,3 +1,3 @@
 class Game < ActiveRecord::Base
-  attr_accessible :board, :color, :id, :name
+  attr_accessible :board, :color, :id, :name, :playerone, :playertwo
 end

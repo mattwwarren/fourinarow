@@ -3,8 +3,10 @@ class CreateGames < ActiveRecord::Migration
     create_table :games do |t|
       t.integer :id
       t.string :name
-      t.enum :color
+      t.integer :color
       t.string :board
+      t.string :playerone
+      t.string :playertwo
 
       t.timestamps
     end
