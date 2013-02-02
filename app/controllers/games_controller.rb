@@ -102,7 +102,15 @@ class GamesController < ApplicationController
   # POST /games/1.json
   def droppiece
    @game = Game.find(params[:id])
-   @game.board[params[:row].to_i][params[:column].to_i] = params[:column].to_i
+
+   _row = 0
+   while @game.board[_row][params[:column].to_i] == 0
+      _row += 1
+      if _row == 6
+         break
+      end
+   end
+   @game.board[_row - 1][params[:column].to_i] = params[:player].to_i
 
    respond_to do |format|
       @game.update_attributes(params[:board])
