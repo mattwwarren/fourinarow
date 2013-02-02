@@ -113,9 +113,57 @@ class GamesController < ApplicationController
    @game.board[_row - 1][params[:column].to_i] = params[:player].to_i
 
    respond_to do |format|
+      if _lookForWinner(_row, params[:column].to_i, params[:player].to_i)
+        print "WINNER"
+      end
       @game.update_attributes(params[:board])
       format.html { redirect_to @game }
       format.json { head :no_content } 
   end
 end
+
+   def _lookForWinner(_row, _col, _player)
+      # Check four in a  row
+      if _lookForRowWin(_row, _col, _player)
+         return true
+      # Check four in a column
+      #elsif _lookForColWin(_row, _col, _player) 
+      # Check four in left-right diagonal
+      #elsif _lookForDiagWin(_row, _col, _player)
+      else
+         return false
+      end
+   end
+   
+   def _lookForRowWin(_row, _col, _player)
+      _fourInRow = [0,0,0,0]
+    
+#There is something wrong in this part here..but some of it works 
+      _fourInRow[0] = @game.board[_row][_col]
+      if _col - 1 >= 0
+         _fourInRow[1] = @game.board[_row][_col - 1]
+      else
+         _fourInRow[1] = @game.board[_row][_col + 1]
+      end
+      if _col - 2 >= 0
+         _fourInRow[2] = @game.board[_row][_col - 2]
+      else
+         _fourInRow[2] = @game.board[_row][_col + 2]
+      end
+      if _col - 3 >= 0
+         _fourInRow[3] = @game.board[_row][_col - 3]
+      else
+         _fourInRow[3] = @game.board[_row][_col + 3]
+      end
+     
+print _fourInRow 
+      _i = 0
+      while _i <= 3
+         if _fourInRow[_i] != _player
+            return false
+         end 
+         _i += 1
+      end
+      return true
+   end
 end
