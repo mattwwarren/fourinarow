@@ -136,34 +136,25 @@ end
    end
    
    def _lookForRowWin(_row, _col, _player)
-      _fourInRow = [0,0,0,0]
-    
-#There is something wrong in this part here..but some of it works 
-      _fourInRow[0] = @game.board[_row][_col]
-      if _col - 1 >= 0
-         _fourInRow[1] = @game.board[_row][_col - 1]
-      else
-         _fourInRow[1] = @game.board[_row][_col + 1]
-      end
-      if _col - 2 >= 0
-         _fourInRow[2] = @game.board[_row][_col - 2]
-      else
-         _fourInRow[2] = @game.board[_row][_col + 2]
-      end
-      if _col - 3 >= 0
-         _fourInRow[3] = @game.board[_row][_col - 3]
-      else
-         _fourInRow[3] = @game.board[_row][_col + 3]
-      end
-     
-print _fourInRow 
+      _totalInRow = [7]
       _i = 0
-      while _i <= 3
-         if _fourInRow[_i] != _player
-            return false
-         end 
+      while _i <= 6
+         _totalInRow[_i] = @game.board[_row][_i]
          _i += 1
       end
-      return true
+print _totalInRow
+#There is something wrong in this part heoure..but some of it works 
+      _j = 0
+      _count = 0
+      while _j <= 6
+         if _totalInRow[_j] == _player
+            _count += 1
+         end
+         if _count > 4
+            return true
+         end 
+         _j += 1
+      end
+      return false
    end
 end
