@@ -115,9 +115,20 @@ class GamesController < ApplicationController
   # POST /games/1.json
   def droppiece
    @game = Game.find(params[:id])
-   @game.board[params[:row].to_i][params[:column].to_i] = params[:column].to_i
+
+   _row = 0
+   while @game.board[_row][params[:column].to_i] == 0
+      _row += 1
+      if _row == 6
+         break
+      end
+   end
+   @game.board[_row - 1][params[:column].to_i] = params[:player].to_i
 
    respond_to do |format|
+      if _lookForWinner(_row, params[:column].to_i, params[:player].to_i)
+        print "WINNER"
+      end
       @game.update_attributes(params[:board])
       format.html { redirect_to @game }
       format.json { head :no_content } 
@@ -127,4 +138,40 @@ class GamesController < ApplicationController
   def check_session(current_session, stored_session)
     current_session == stored_session
   end
+
+   def _lookForWinner(_row, _col, _player)
+      # Check four in a  row
+      if _lookForRowWin(_row, _col, _player)
+         return true
+      # Check four in a column
+      #elsif _lookForColWin(_row, _col, _player) 
+      # Check four in left-right diagonal
+      #elsif _lookForDiagWin(_row, _col, _player)
+      else
+         return false
+      end
+   end
+   
+   def _lookForRowWin(_row, _col, _player)
+      _totalInRow = [7]
+      _i = 0
+      while _i <= 6
+         _totalInRow[_i] = @game.board[_row][_i]
+         _i += 1
+      end
+print _totalInRow
+#There is something wrong in this part heoure..but some of it works 
+      _j = 0
+      _count = 0
+      while _j <= 6
+         if _totalInRow[_j] == _player
+            _count += 1
+         end
+         if _count > 4
+            return true
+         end 
+         _j += 1
+      end
+      return false
+   end
 end
